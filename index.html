@@ -807,6 +807,82 @@ footer p {
   .hero-sub { font-size: 1rem; }
   .section-title { font-size: 1.7rem; }
 }
+
+/* ---- CONVERSATION OVERLAY ---- */
+#conversation-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--bg-deep);
+  z-index: 6000;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#conversation-overlay.active {
+  display: flex;
+}
+
+.conv-inner {
+  text-align: center;
+  padding: 24px;
+}
+
+.conv-orb {
+  width: 140px;
+  height: 140px;
+  margin: 40px auto;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: breathe 6s ease-in-out infinite;
+  transition: all 0.4s ease;
+}
+
+.conv-orb.speaking {
+  border-color: var(--accent-light);
+  box-shadow: 0 0 60px rgba(184, 148, 95, 0.3);
+  animation: convPulse 1.2s ease-in-out infinite;
+}
+
+.conv-orb-inner {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-dim) 0%, transparent 70%);
+}
+
+@keyframes convPulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 40px rgba(184, 148, 95, 0.2); }
+  50% { transform: scale(1.1); box-shadow: 0 0 80px rgba(184, 148, 95, 0.4); }
+}
+
+.conv-status {
+  font-size: 1rem;
+  color: var(--text-sec);
+  margin-bottom: 48px;
+  min-height: 24px;
+}
+
+.conv-end-btn {
+  background: none;
+  border: 1px solid var(--border-strong);
+  color: var(--text-muted);
+  padding: 12px 32px;
+  border-radius: 60px;
+  cursor: pointer;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.conv-end-btn:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
 </style>
 </head>
 <body>
@@ -1265,6 +1341,20 @@ footer p {
 
 </div><!-- end #funnel-overlay -->
 
+<!-- ==========================================
+     CONVERSATION OVERLAY
+     ========================================== -->
+<div id="conversation-overlay">
+  <div class="conv-inner">
+    <div class="f-label">The Shift</div>
+    <div id="conv-orb" class="conv-orb">
+      <div class="conv-orb-inner"></div>
+    </div>
+    <p id="conv-status" class="conv-status">Connecting...</p>
+    <button class="conv-end-btn" onclick="endConversation()">End Conversation</button>
+  </div>
+</div>
+
 
 <script>
 // ---- State ----
@@ -1419,18 +1509,8 @@ function submitEmail() {
   goToStep(9);
 }
 
-// ---- Launch ElevenLabs Conversation ----
-function launchConversation() {
-  // Close the funnel overlay
-  closeFunnel();
-  // Add the ElevenLabs widget to the page
-  const existing = document.getElementById('elevenlabs-widget');
-  if (existing) existing.remove();
-  const widget = document.createElement('elevenlabs-convai');
-  widget.setAttribute('agent-id', 'agent_9501khf35mehe308835dqpqe373j');
-  widget.id = 'elevenlabs-widget';
-  document.body.appendChild(widget);
-}
+// ---- Conversation (implemented in module script below) ----
+// launchConversation() and endConversation() are defined in the module script
 
 // ---- Landing Page JS ----
 
@@ -1460,7 +1540,62 @@ const revealObserver = new IntersectionObserver((entries) => {
 revealElements.forEach(el => revealObserver.observe(el));
 </script>
 
-<script src="https://elevenlabs.io/convai-widget/index.js" async></script>
+<script type="module">
+import { Conversation } from "https://esm.sh/@elevenlabs/client@0.14.0";
+
+let conversation = null;
+
+window.launchConversation = async function() {
+  // Close funnel if open
+  if (typeof closeFunnel === 'function') closeFunnel();
+
+  const overlay = document.getElementById('conversation-overlay');
+  const statusEl = document.getElementById('conv-status');
+  const orbEl = document.getElementById('conv-orb');
+
+  overlay.classList.add('active');
+  document.body.classList.add('funnel-open');
+  statusEl.textContent = 'Connecting...';
+  orbEl.classList.remove('speaking');
+
+  try {
+    conversation = await Conversation.startSession({
+      agentId: "agent_9501khf35mehe308835dqpqe373j",
+      onConnect: () => {
+        statusEl.textContent = 'Listening...';
+      },
+      onDisconnect: () => {
+        statusEl.textContent = 'Conversation ended';
+        orbEl.classList.remove('speaking');
+      },
+      onModeChange: ({ mode }) => {
+        if (mode === 'speaking') {
+          orbEl.classList.add('speaking');
+          statusEl.textContent = '';
+        } else {
+          orbEl.classList.remove('speaking');
+          statusEl.textContent = 'Listening...';
+        }
+      },
+      onError: (msg) => {
+        console.error('ElevenLabs error:', msg);
+      },
+    });
+  } catch (err) {
+    statusEl.textContent = 'Could not connect — please allow microphone and try again';
+    console.error(err);
+  }
+};
+
+window.endConversation = async function() {
+  if (conversation) {
+    await conversation.endSession();
+    conversation = null;
+  }
+  document.getElementById('conversation-overlay').classList.remove('active');
+  document.body.classList.remove('funnel-open');
+};
+</script>
 
 </body>
 </html>
