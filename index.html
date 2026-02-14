@@ -1263,22 +1263,6 @@ footer p {
     </div>
   </div>
 
-  <!-- STEP 10: Active Conversation -->
-  <div class="f-screen" data-step="10">
-    <button class="f-back" onclick="endConversation()" style="z-index: 5200;">&larr; End</button>
-    <div class="f-inner" style="max-width: 480px;">
-      <div id="conversation-container" style="text-align: center;">
-        <div class="f-label">The Shift</div>
-        <h2 class="f-title" style="margin-bottom: 16px;">Your conversation is live</h2>
-        <p class="f-sub" style="margin-bottom: 32px;">Speak naturally. The AI is listening.</p>
-        <div id="conversation-orb" style="width: 120px; height: 120px; margin: 0 auto 32px; border-radius: 50%; border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; animation: breathe 4s ease-in-out infinite; position: relative;">
-          <div style="width: 80px; height: 80px; border-radius: 50%; background: radial-gradient(circle, var(--accent-dim) 0%, transparent 70%); animation: breathe 4s ease-in-out infinite reverse;"></div>
-        </div>
-        <p id="conversation-status" style="font-size: 0.9rem; color: var(--text-muted);">Connecting...</p>
-      </div>
-    </div>
-  </div>
-
 </div><!-- end #funnel-overlay -->
 
 
@@ -1437,19 +1421,15 @@ function submitEmail() {
 
 // ---- Launch ElevenLabs Conversation ----
 function launchConversation() {
-  goToStep(10);
-  // Add the ElevenLabs widget dynamically
+  // Close the funnel overlay
+  closeFunnel();
+  // Add the ElevenLabs widget to the page
+  const existing = document.getElementById('elevenlabs-widget');
+  if (existing) existing.remove();
   const widget = document.createElement('elevenlabs-convai');
   widget.setAttribute('agent-id', 'agent_9501khf35mehe308835dqpqe373j');
   widget.id = 'elevenlabs-widget';
   document.body.appendChild(widget);
-  document.getElementById('conversation-status').textContent = 'Listening...';
-}
-
-function endConversation() {
-  const widget = document.getElementById('elevenlabs-widget');
-  if (widget) widget.remove();
-  closeFunnel();
 }
 
 // ---- Landing Page JS ----
