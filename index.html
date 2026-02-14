@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Shift — One Conversation. One Realization. Everything Changes.</title>
+<meta name="description" content="A guided 20-minute conversation that reveals the most important insight you've never had. $100. Money back if you don't experience the shift.">
+<meta property="og:title" content="The Shift — See What You've Been Missing">
+<meta property="og:description" content="A 20-minute conversation that changes everything. The greatest minds in history all point to the same realization. Experience it directly.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg-deep: #0a0908;
+  --bg: #0f0d0a;
+  --bg-surface: #141210;
+  --bg-card: #1a1815;
+  --bg-card-hover: #201e1a;
+  --accent: #b8945f;
+  --accent-light: #d4ad6e;
+  --accent-dim: rgba(184, 148, 95, 0.12);
+  --accent-glow: rgba(184, 148, 95, 0.06);
+  --text: #ede7d9;
+  --text-sec: #a89e8e;
+  --text-muted: #6a6256;
+  --border: rgba(184, 148, 95, 0.1);
+  --border-strong: rgba(184, 148, 95, 0.2);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Nunito Sans', sans-serif;
+  background: var(--bg-deep);
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 16px;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: 0.03;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 500; line-height: 1.2; }
+
+a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+a:hover { color: var(--accent-light); }
+
+.container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+.container-narrow { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+
+/* ---- HERO ---- */
+.hero {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  padding: 80px 24px;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(184, 148, 95, 0.08) 0%, transparent 70%);
+  animation: breathe 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
+}
+
+.hero-content { position: relative; z-index: 1; max-width: 700px; }
+
+.hero-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.2s forwards;
+}
+
+.hero h1 {
+  font-size: 4rem;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.4s forwards;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--accent-light);
+}
+
+.hero-sub {
+  font-size: 1.15rem;
+  color: var(--text-sec);
+  max-width: 520px;
+  margin: 0 auto 48px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.6s forwards;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--accent);
+  color: var(--bg-deep);
+  font-weight: 700;
+  font-size: 15px;
+  padding: 16px 40px;
+  border-radius: 60px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.8s forwards;
+  text-decoration: none;
+}
+
+.hero-cta:hover {
+  background: var(--accent-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(184, 148, 95, 0.25);
+  color: var(--bg-deep);
+}
+
+.hero-meta {
+  margin-top: 24px;
+  font-size: 13px;
+  color: var(--text-muted);
+  opacity: 0;
+  animation: fadeUp 0.8s ease 1s forwards;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- SECTION ---- */
+section {
+  padding: 120px 0;
+  position: relative;
+}
+
+section + section {
+  border-top: 1px solid var(--border);
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2.8rem;
+  text-align: center;
+  margin-bottom: 24px;
+  color: var(--text);
+}
+
+.section-sub {
+  font-size: 1.05rem;
+  color: var(--text-sec);
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 64px;
+}
+
+/* ---- THE PROBLEM ---- */
+.problem-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  line-height: 1.8;
+  color: var(--text-sec);
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.problem-text strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* ---- QUOTES ---- */
+.quotes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 64px;
+}
+
+.quote-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 36px 32px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.quote-card:hover {
+  border-color: var(--border-strong);
+  background: var(--bg-card-hover);
+  transform: translateY(-3px);
+}
+
+.quote-card::before {
+  content: '\201C';
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 4rem;
+  color: var(--accent);
+  opacity: 0.25;
+  position: absolute;
+  top: 12px;
+  left: 24px;
+  line-height: 1;
+}
+
+.quote-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+.quote-author {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+}
+
+.quote-role {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* ---- EXPERIENCE ---- */
+.experience-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.experience-steps::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+  opacity: 0.3;
+}
+
+.exp-step {
+  display: flex;
+  gap: 28px;
+  padding: 32px 0;
+  position: relative;
+}
+
+.exp-step-num {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  color: var(--accent);
+  background: var(--bg-deep);
+  z-index: 1;
+}
+
+.exp-step h4 {
+  font-size: 1.25rem;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.exp-step p {
+  color: var(--text-sec);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* ---- GUARANTEE ---- */
+.guarantee-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-strong);
+  border-radius: 16px;
+  padding: 56px 48px;
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.guarantee-box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, var(--accent-glow) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.guarantee-icon {
+  font-size: 3rem;
+  margin-bottom: 24px;
+}
+
+.guarantee-box h3 {
+  font-size: 2rem;
+  margin-bottom: 16px;
+}
+
+.guarantee-box p {
+  color: var(--text-sec);
+  font-size: 1.05rem;
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+/* ---- PRICING ---- */
+.pricing-card {
+  background: var(--bg-card);
+  border: 2px solid var(--accent);
+  border-radius: 20px;
+  padding: 56px 48px;
+  text-align: center;
+  max-width: 480px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.pricing-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at top, rgba(184, 148, 95, 0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.pricing-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+
+.pricing-amount {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 4.5rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.pricing-per {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+}
+
+.pricing-features {
+  list-style: none;
+  text-align: left;
+  margin-bottom: 40px;
+}
+
+.pricing-features li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-sec);
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pricing-features li:last-child { border-bottom: none; }
+
+.check {
+  color: var(--accent);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.pricing-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--accent);
+  color: var(--bg-deep);
+  font-weight: 700;
+  font-size: 16px;
+  padding: 18px 48px;
+  border-radius: 60px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.pricing-cta:hover {
+  background: var(--accent-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(184, 148, 95, 0.25);
+  color: var(--bg-deep);
+}
+
+.pricing-note {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* ---- FAQ ---- */
+.faq-list {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--border);
+}
+
+.faq-q {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 24px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  color: var(--text);
+  text-align: left;
+  transition: color 0.2s;
+}
+
+.faq-q:hover { color: var(--accent-light); }
+
+.faq-arrow {
+  font-size: 18px;
+  color: var(--text-muted);
+  transition: transform 0.3s ease;
+  min-width: 20px;
+  text-align: center;
+}
+
+.faq-item.open .faq-arrow { transform: rotate(45deg); }
+
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+}
+
+.faq-item.open .faq-a {
+  max-height: 300px;
+  padding-bottom: 24px;
+}
+
+.faq-a p {
+  color: var(--text-sec);
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+/* ---- FOOTER ---- */
+footer {
+  padding: 48px 0;
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+
+footer p {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* ---- SCROLL ANIMATIONS ---- */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2.6rem; }
+  .section-title { font-size: 2rem; }
+  .quotes-grid { grid-template-columns: 1fr; }
+  .quote-card { padding: 28px 24px; }
+  .guarantee-box { padding: 40px 28px; }
+  .pricing-card { padding: 40px 28px; }
+  .problem-text { font-size: 1.25rem; }
+  section { padding: 80px 0; }
+}
+
+@media (max-width: 480px) {
+  .hero h1 { font-size: 2.1rem; }
+  .hero-sub { font-size: 1rem; }
+  .section-title { font-size: 1.7rem; }
+  .pricing-amount { font-size: 3.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-label">A 20-Minute Conversation</div>
+    <h1>What if the most important thing you could ever realize was already <em>true?</em></h1>
+    <p class="hero-sub">Every great spiritual teacher points to the same insight. Most people spend years trying to grasp it. This conversation takes 20 minutes.</p>
+    <a href="#pricing" class="hero-cta">Experience The Shift &darr;</a>
+    <p class="hero-meta">$100 &middot; Full refund if you don't experience it</p>
+  </div>
+</section>
+
+<!-- ============ THE PROBLEM ============ -->
+<section id="problem">
+  <div class="container-narrow">
+    <div class="section-label reveal">The Invisible Prison</div>
+    <h2 class="section-title reveal">You've been thinking your entire life.<br>You've never noticed <em>who's watching.</em></h2>
+    <div class="problem-text reveal" style="margin-top: 48px;">
+      Right now, a voice in your head is reading these words. It comments on everything. It judges, worries, plans, regrets. It never stops. <strong>You've assumed your entire life that this voice is you.</strong>
+      <br><br>
+      But what if it isn't?
+      <br><br>
+      What if there's something <strong>behind</strong> the voice &mdash; something aware of it &mdash; that has been here all along, quietly watching, completely at peace? Not a theory. Not a belief. Something you can <strong>see directly</strong>, right now, in this moment.
+      <br><br>
+      That's the shift.
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUOTES ============ -->
+<section id="wisdom">
+  <div class="container">
+    <div class="section-label reveal">They All Found It</div>
+    <h2 class="section-title reveal">Across centuries. Across traditions.<br>The same realization.</h2>
+    <p class="section-sub reveal">The greatest minds in human history all converge on a single insight. Not a philosophy. A direct seeing.</p>
+
+    <div class="quotes-grid">
+      <div class="quote-card reveal">
+        <p class="quote-text">You are not your mind. The moment you start watching the thinker, a higher level of consciousness becomes activated. You begin to realize that there is a vast realm of intelligence beyond thought.</p>
+        <div class="quote-author">Eckhart Tolle</div>
+        <div class="quote-role">Author of The Power of Now</div>
+      </div>
+
+      <div class="quote-card reveal">
+        <p class="quote-text">The feeling of being an ego, a separate self, is a hallucination. There is no thinker behind the thought. The thought itself is the thinker. When you look for the one who is looking, you find only the looking itself.</p>
+        <div class="quote-author">Sam Harris</div>
+        <div class="quote-role">Neuroscientist & Author of Waking Up</div>
+      </div>
+
+      <div class="quote-card reveal">
+        <p class="quote-text">You are not in the universe. You are the universe, an intrinsic part of it. Ultimately you are not a person, but a focal point where the universe is becoming conscious of itself.</p>
+        <div class="quote-author">Eckhart Tolle</div>
+        <div class="quote-role">Author of A New Earth</div>
+      </div>
+
+      <div class="quote-card reveal">
+        <p class="quote-text">Don't try to understand! It's enough if you do not misunderstand. Just be aware of your thoughts &mdash; but don't think about your thoughts. The moment you become aware, the whole thing changes.</p>
+        <div class="quote-author">Osho</div>
+        <div class="quote-role">Spiritual Teacher & Philosopher</div>
+      </div>
+
+      <div class="quote-card reveal">
+        <p class="quote-text">You are not a drop in the ocean. You are the entire ocean in a drop. Stop acting so small. You are the universe in ecstatic motion.</p>
+        <div class="quote-author">Rumi</div>
+        <div class="quote-role">13th Century Poet & Mystic</div>
+      </div>
+
+      <div class="quote-card reveal">
+        <p class="quote-text">The mind is a bundle of thoughts. The thoughts have their root in the &lsquo;I&rsquo; thought. Whoever investigates the &lsquo;I&rsquo; thought, the mind will dissolve, and what remains is pure awareness.</p>
+        <div class="quote-author">Ramana Maharshi</div>
+        <div class="quote-role">Indian Sage</div>
+      </div>
+
+      <div class="quote-card reveal">
+        <p class="quote-text">Muddy water is best cleared by leaving it alone. We do not &lsquo;come into&rsquo; this world; we come out of it, as leaves from a tree. You are something the whole universe is doing.</p>
+        <div class="quote-author">Alan Watts</div>
+        <div class="quote-role">Philosopher & Writer</div>
+      </div>
+
+      <div class="quote-card reveal">
+        <p class="quote-text">Between stimulus and response there is a space. In that space is our freedom and our power to choose our response. In that space lies our growth and our freedom.</p>
+        <div class="quote-author">Viktor Frankl</div>
+        <div class="quote-role">Psychiatrist & Holocaust Survivor</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE EXPERIENCE ============ -->
+<section id="experience">
+  <div class="container-narrow">
+    <div class="section-label reveal">The Conversation</div>
+    <h2 class="section-title reveal">What happens in 20 minutes</h2>
+    <p class="section-sub reveal">This is not a lecture. Not a meditation class. It's a guided conversation designed to help you <em>see</em> something directly.</p>
+
+    <div class="experience-steps">
+      <div class="exp-step reveal">
+        <div class="exp-step-num">1</div>
+        <div>
+          <h4>We meet you where you are</h4>
+          <p>No prerequisites. No spiritual background needed. No beliefs required. We start with your actual, lived experience right now &mdash; not concepts.</p>
+        </div>
+      </div>
+
+      <div class="exp-step reveal">
+        <div class="exp-step-num">2</div>
+        <div>
+          <h4>We turn attention around</h4>
+          <p>Through precise questions &mdash; not explanations &mdash; we guide your attention away from what you're looking <em>at</em> and toward what's doing the looking. This is the critical move most people have never made.</p>
+        </div>
+      </div>
+
+      <div class="exp-step reveal">
+        <div class="exp-step-num">3</div>
+        <div>
+          <h4>You look for the thinker</h4>
+          <p>We ask you to find the one behind your thoughts. Not conceptually. Actually look. What happens next is the moment everything changes &mdash; because <strong>there's nothing there</strong>. Just open, aware space.</p>
+        </div>
+      </div>
+
+      <div class="exp-step reveal">
+        <div class="exp-step-num">4</div>
+        <div>
+          <h4>The shift</h4>
+          <p>In the gap where you expected to find a "self," you discover something that has always been here: pure awareness, already at rest, watching everything unfold. Not a theory. A direct recognition that can't be unfelt.</p>
+        </div>
+      </div>
+
+      <div class="exp-step reveal">
+        <div class="exp-step-num">5</div>
+        <div>
+          <h4>Integration</h4>
+          <p>We help you understand what just happened, how to return to it, and why this changes the way you relate to every thought, emotion, and experience from here forward.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHAT CHANGES ============ -->
+<section id="changes">
+  <div class="container-narrow">
+    <div class="section-label reveal">After The Shift</div>
+    <h2 class="section-title reveal">What changes when you see it</h2>
+
+    <div style="max-width: 560px; margin: 48px auto 0;">
+      <div class="exp-step reveal" style="display: flex; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--border);">
+        <div style="color: var(--accent); font-size: 1.4rem; min-width: 28px;">&#9671;</div>
+        <div>
+          <h4 style="font-size: 1.1rem; margin-bottom: 6px;">Anxiety loses its authority</h4>
+          <p style="color: var(--text-sec); font-size: 0.92rem;">Anxious thoughts still appear. But they no longer own you. They're weather passing through &mdash; and you're the sky.</p>
+        </div>
+      </div>
+
+      <div class="exp-step reveal" style="display: flex; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--border);">
+        <div style="color: var(--accent); font-size: 1.4rem; min-width: 28px;">&#9671;</div>
+        <div>
+          <h4 style="font-size: 1.1rem; margin-bottom: 6px;">You respond instead of react</h4>
+          <p style="color: var(--text-sec); font-size: 0.92rem;">A space opens between stimulus and response. In that space: freedom, clarity, choice.</p>
+        </div>
+      </div>
+
+      <div class="exp-step reveal" style="display: flex; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--border);">
+        <div style="color: var(--accent); font-size: 1.4rem; min-width: 28px;">&#9671;</div>
+        <div>
+          <h4 style="font-size: 1.1rem; margin-bottom: 6px;">The inner critic becomes transparent</h4>
+          <p style="color: var(--text-sec); font-size: 0.92rem;">Self-judgment continues out of habit. But you see it for what it is &mdash; just another thought, with no more weight than a passing cloud.</p>
+        </div>
+      </div>
+
+      <div class="exp-step reveal" style="display: flex; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--border);">
+        <div style="color: var(--accent); font-size: 1.4rem; min-width: 28px;">&#9671;</div>
+        <div>
+          <h4 style="font-size: 1.1rem; margin-bottom: 6px;">You stop waiting to be okay</h4>
+          <p style="color: var(--text-sec); font-size: 0.92rem;">Most people believe they'll be at peace when circumstances change. This realization reveals that peace was never missing &mdash; just overlooked.</p>
+        </div>
+      </div>
+
+      <div class="exp-step reveal" style="display: flex; gap: 20px; padding: 20px 0;">
+        <div style="color: var(--accent); font-size: 1.4rem; min-width: 28px;">&#9671;</div>
+        <div>
+          <h4 style="font-size: 1.1rem; margin-bottom: 6px;">Life becomes vivid again</h4>
+          <p style="color: var(--text-sec); font-size: 0.92rem;">When you're no longer lost in the mental narrative, you notice the world as it actually is. Colors, sounds, presence &mdash; the aliveness you had as a child returns.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GUARANTEE ============ -->
+<section id="guarantee">
+  <div class="container-narrow">
+    <div class="guarantee-box reveal">
+      <div class="guarantee-icon">&#9826;</div>
+      <h3>The Guarantee</h3>
+      <p>If you don't experience a genuine shift in perception during our 20-minute conversation &mdash; a clear, unmistakable moment where you <em>see</em> what these teachers are pointing to &mdash; you pay nothing. Full refund. No questions asked. We either deliver the insight or we don't charge you for it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section id="pricing">
+  <div class="container-narrow">
+    <div class="section-label reveal">Book Your Session</div>
+    <h2 class="section-title reveal">One conversation. One realization.</h2>
+    <p class="section-sub reveal">Most people spend years reading books, attending retreats, and meditating without ever having the direct experience these teachers describe. This conversation is designed to take you there in 20 minutes.</p>
+
+    <div class="pricing-card reveal">
+      <div class="pricing-label">The Shift</div>
+      <div class="pricing-amount">$100</div>
+      <div class="pricing-per">One 20-minute conversation</div>
+
+      <ul class="pricing-features">
+        <li><span class="check">&#10003;</span> Live 1-on-1 guided conversation</li>
+        <li><span class="check">&#10003;</span> No spiritual experience required</li>
+        <li><span class="check">&#10003;</span> Direct experiential insight, not theory</li>
+        <li><span class="check">&#10003;</span> Integration guidance included</li>
+        <li><span class="check">&#10003;</span> Full money-back guarantee</li>
+      </ul>
+
+      <a href="#book" class="pricing-cta">Book Your Shift</a>
+      <p class="pricing-note">You'll receive a link to schedule your session after booking</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq">
+  <div class="container-narrow">
+    <div class="section-label reveal">Questions</div>
+    <h2 class="section-title reveal">Common questions</h2>
+
+    <div class="faq-list" style="margin-top: 48px;">
+      <div class="faq-item">
+        <button class="faq-q">
+          <span>Do I need any spiritual background or meditation experience?</span>
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">
+          <p>No. In fact, having less baggage can make the insight easier to see. This isn't about learning a new framework &mdash; it's about noticing something that's already true about your direct experience right now. Beginners often get it faster than long-time meditators who've built complex belief systems around it.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <span>How is this different from meditation or therapy?</span>
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Meditation practices often aim to calm the mind or observe thoughts over time. This conversation isn't about calming anything &mdash; it's about seeing, in a single moment, that you are not the thinker you've assumed yourself to be. It's not a practice. It's a recognition. Once you see it, you can't unsee it.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <span>What if it doesn't work for me?</span>
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">
+          <p>You get a full refund. No questions asked. The insight is either seen directly or it isn't &mdash; and you'll know the difference. We don't want your money unless you've experienced something genuinely transformative.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <span>Is this a one-time thing or do I need follow-up sessions?</span>
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">
+          <p>The core insight happens once and can't be unfelt. Like learning to see a hidden image in a stereogram &mdash; once you see it, you see it. The initial conversation includes integration guidance so you know how to return to the insight on your own. Some people choose to book follow-up sessions to deepen their understanding, but it's not required.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <span>Is this religious?</span>
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">
+          <p>No. This isn't about adopting any belief system, joining anything, or subscribing to any worldview. The insight we're pointing to has been described by neuroscientists, philosophers, and secular thinkers just as clearly as by spiritual traditions. It's about your direct experience &mdash; not faith.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <span>How does the conversation happen?</span>
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">
+          <p>After booking, you'll receive a link to schedule a time that works for you. The conversation happens over video call. It's a live, one-on-one guided experience &mdash; not a recording, not a chatbot, not a group session.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section id="final-cta" style="text-align: center;">
+  <div class="container-narrow">
+    <h2 class="section-title reveal" style="margin-bottom: 16px;">You've been looking at thoughts your whole life.<br>It's time to see <em>what's looking.</em></h2>
+    <p class="section-sub reveal" style="margin-bottom: 40px;">20 minutes. One insight. Money back if you don't see it.</p>
+    <a href="#pricing" class="hero-cta reveal" style="opacity: 1; animation: none;">Book Your Shift &mdash; $100</a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <p>The Shift &middot; One Conversation. One Realization.</p>
+</footer>
+
+<script>
+// ---- FAQ Accordion ----
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+
+// ---- Scroll Reveal ----
+const revealElements = document.querySelectorAll('.reveal');
+
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, {
+  threshold: 0.15,
+  rootMargin: '0px 0px -40px 0px'
+});
+
+revealElements.forEach(el => revealObserver.observe(el));
+
+// ---- Smooth scroll for anchor links ----
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
