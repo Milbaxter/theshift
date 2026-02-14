@@ -1182,6 +1182,7 @@ footer p {
   <div class="f-screen" data-step="4">
     <div class="f-inner">
       <div class="f-reaction-page" id="reaction-1"></div>
+      <button class="cta-btn" style="margin-top: 36px;" onclick="goToStep(5)">Continue</button>
     </div>
   </div>
 
@@ -1216,6 +1217,7 @@ footer p {
   <div class="f-screen" data-step="6">
     <div class="f-inner">
       <div class="f-reaction-page" id="reaction-2"></div>
+      <button class="cta-btn" style="margin-top: 36px;" onclick="goToStep(7)">Continue</button>
     </div>
   </div>
 
@@ -1250,6 +1252,7 @@ footer p {
   <div class="f-screen" data-step="8">
     <div class="f-inner">
       <div class="f-reaction-page" id="reaction-3"></div>
+      <button class="cta-btn" style="margin-top: 36px;" onclick="goToStep(9)">Continue</button>
     </div>
   </div>
 
@@ -1435,9 +1438,6 @@ function selectAnswer(qNum, value, el) {
 
   // Go to reaction screen after short delay
   setTimeout(() => goToStep(reactionStep), 500);
-
-  // Auto-advance from reaction to next question after reading time
-  setTimeout(() => goToStep(NEXT_QUESTION[qNum]), 4000);
 }
 
 // ---- Loading ----
